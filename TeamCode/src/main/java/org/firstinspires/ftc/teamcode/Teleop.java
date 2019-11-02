@@ -103,12 +103,12 @@ public class Teleop extends LinearOpMode {
                 armboi.setPower(1);
                 telemetry.addLine("should be moving");
 
-            }/*
+            }
             if (slide.getCurrentPosition() > slidepos || slide.getCurrentPosition() < slidepos) {
                 slide.setTargetPosition(slidepos);
                 slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 slide.setPower(1);
-            }*/
+            }
 
 
 /* diagonal movement
@@ -179,17 +179,11 @@ public class Teleop extends LinearOpMode {
             //controller 2////////////////////////////////////////////////////////////////////////////////
 
 
-            if (Math.abs(LStickY2) > 0) {
+            if (LStickY2 > 0) {
                 //up
-                slide.setPower(LStickY2);
                 slidepos += (75 * Math.abs(LStickY2));
             }
-            else {
-                slide.setPower(0);
-            }
-
-
-            if (LStickY2 < 0) {
+            else if (LStickY2 < 0) {
                 //down (has bottom limit)
                 if (!(slide.getCurrentPosition() < 15)) {
                     slidepos -= (75 * Math.abs(LStickY2));

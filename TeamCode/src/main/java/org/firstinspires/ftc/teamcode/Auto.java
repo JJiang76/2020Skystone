@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.disnodeteam.dogecv.DogeCV;
+import com.disnodeteam.dogecv.detectors.skystone.SkystoneDetector;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -40,6 +42,7 @@ public class Auto extends LinearOpMode {
     Servo grableft;
     Servo blockgrab;
     WebcamName webcam;
+    SkystoneDetector detector;
 
     final double TICKS = 1440;
     final double CIRC = 4 * Math.PI;
@@ -264,6 +267,7 @@ public class Auto extends LinearOpMode {
         }
 
         targetsSkyStone.activate();
+
 
 
         waitForStart();
