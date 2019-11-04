@@ -37,6 +37,7 @@ public class autotest extends LinearOpMode {
         detector.useDefaults();
         camera.setPipeline(detector);
 
+        System.out.println("hello");
 
 
         camera.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
