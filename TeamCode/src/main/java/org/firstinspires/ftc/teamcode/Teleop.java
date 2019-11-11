@@ -161,6 +161,12 @@ public class Teleop extends LinearOpMode {
             else if (Math.abs(RTrigger1) > 0) {
                 SetPower(RTrigger1, -RTrigger1, -RTrigger1, RTrigger1);
             }
+            else if (leftBump1) {
+                SetPower(.3, -.3, .3, -.3);
+            }
+            else if (rightBump1) {
+                SetPower(-.3, .3, -.3, .3);
+            }
             else {
                 SetPower(0, 0, 0, 0);
             }
