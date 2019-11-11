@@ -1,12 +1,10 @@
-package org.firstinspires.ftc.teamcode;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous (name = "blue blocks auto")
-public class AutoBlueBlocks extends LinearOpMode {
+@Autonomous(name = "practice auto")
+public class practice extends LinearOpMode {
     DcMotor rightfront;
     DcMotor leftfront;
     DcMotor leftback;
@@ -21,80 +19,8 @@ public class AutoBlueBlocks extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        telemetry.addLine("init");
-        telemetry.update();
 
-        rightfront = hardwareMap.get(DcMotor.class, "rightfront");
-        leftfront = hardwareMap.get(DcMotor.class, "leftfront");
-        leftback = hardwareMap.get(DcMotor.class, "leftback");
-        rightback = hardwareMap.get(DcMotor.class, "rightback");
-        blockgrab = hardwareMap.get(Servo.class, "servo2");
-        armboi = hardwareMap.get(DcMotor.class, "armboi");
 
-        grabright = hardwareMap.get(Servo.class, "servo0");
-        grableft = hardwareMap.get(Servo.class, "servo1");
-
-        rightfront.setDirection(DcMotor.Direction.REVERSE);
-        rightback.setDirection(DcMotor.Direction.REVERSE);
-        leftback.setDirection(DcMotor.Direction.FORWARD);
-        leftfront.setDirection(DcMotor.Direction.FORWARD);
-        armboi.setDirection(DcMotor.Direction.REVERSE);
-
-        armboi.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        waitForStart();
-
-        blockgrab.setPosition(1);
-        forward(29, 1); //approaches  a block
-        blockgrab.setPosition(.25);
-        sleep(500);
-        //block grabbed
-
-        back(14,1);
-        counter(22, 1);
-        forward(50, 1);
-        blockgrab.setPosition(1);
-        //drop off; head back
-
-        back(58, 1);
-        clock(22,1);
-        forward(15, 1);
-        blockgrab.setPosition(.25);
-        sleep(500);
-        //second block grabbed
-
-        back(14,.75);
-        counter(22, 1);
-        forward(58, 1);
-        blockgrab.setPosition(1);
-        //drop off; head back
-
-        back(64, 1);
-        clock(22,1);
-        forward(15, 1);
-        blockgrab.setPosition(.25);
-        sleep(500);
-        //third block grabbed
-
-        back(14,.75);
-        counter(22, 1);
-        forward(64, 1);
-        blockgrab.setPosition(1);
-        //drop off; head back
-/*
-        back(72, 1);
-        clock(22,1);
-        forward(15, 1);
-        blockgrab.setPosition(.25);
-        sleep(500);
-        //fourth block grabbed
-
-        back(14,.75);
-        counter(22, 1);
-        forward(72, 1);
-        blockgrab.setPosition(.5);
-        //drop off; head back
-*/
     }
 
 
@@ -169,3 +95,7 @@ public class AutoBlueBlocks extends LinearOpMode {
         rightback.setPower(RBPower);
     }
 }
+
+
+
+

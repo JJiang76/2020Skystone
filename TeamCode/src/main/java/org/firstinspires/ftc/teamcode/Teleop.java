@@ -1,13 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
-//import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.exception.TargetPositionNotSetException;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
+
 
 @TeleOp(name = "testop")
 public class Teleop extends LinearOpMode {
@@ -20,9 +18,12 @@ public class Teleop extends LinearOpMode {
     Servo grabright;
     Servo grableft;
     Servo blockgrab;
+    Servo grableft2;
+    Servo grabright2;
 
     int slidepos = 0;
     int armpos = 0;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -33,17 +34,20 @@ public class Teleop extends LinearOpMode {
         armboi = hardwareMap.get(DcMotor.class, "armboi");
         slide = hardwareMap.get(DcMotor.class,"armboislides");
 
+        //autonomous arm
+        blockgrab = hardwareMap.get(Servo.class, "servo2");
+        //bottom two grabbers
         grabright = hardwareMap.get(Servo.class, "servo0");
         grableft = hardwareMap.get(Servo.class, "servo1");
-        blockgrab = hardwareMap.get(Servo.class, "servo2");
-
+        //top two grabbers
+        grableft2 = hardwareMap.get(Servo.class, "servo3");
+        grabright2 = hardwareMap.get(Servo.class, "servo4");
 
         rightfront.setDirection(DcMotor.Direction.REVERSE);
         rightback.setDirection(DcMotor.Direction.REVERSE);
         leftback.setDirection(DcMotor.Direction.FORWARD);
         leftfront.setDirection(DcMotor.Direction.FORWARD);
         armboi.setDirection(DcMotor.Direction.REVERSE);
-
 
         //slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armboi.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -58,6 +62,10 @@ public class Teleop extends LinearOpMode {
         //servo starting positions
         grableft.setPosition(.9);
         grabright.setPosition(0);
+        grableft2.setPosition(.6);
+        grabright2.setPosition(.4);
+
+
 
         while(opModeIsActive()) {
             boolean a1 = gamepad1.a;
@@ -82,6 +90,8 @@ public class Teleop extends LinearOpMode {
 
             double LTrigger2 = gamepad2.left_trigger;
             double RTrigger2 = gamepad2.right_trigger;
+            boolean LBumper2 = gamepad2.left_bumper;
+            boolean RBumper2 = gamepad2.right_bumper;
 
             double RStickY2 = -gamepad2.right_stick_y;
             double RStickX2 = gamepad2.right_stick_x;
@@ -94,6 +104,9 @@ public class Teleop extends LinearOpMode {
 
             boolean dpadUP2 = gamepad2.dpad_up;
             boolean dpadDOWN2 =gamepad2.dpad_down;
+            boolean dpadRight2 = gamepad2.dpad_right;
+            boolean dpadLeft2 = gamepad2.dpad_left;
+
 
 
             //locking mechanisms
@@ -179,6 +192,9 @@ public class Teleop extends LinearOpMode {
             //controller 2////////////////////////////////////////////////////////////////////////////////
 
 
+
+
+
             if (LStickY2 > 0) {
                 //up
                 slidepos += (75 * Math.abs(LStickY2));
@@ -208,6 +224,22 @@ public class Teleop extends LinearOpMode {
                 grableft.setPosition(grableft.getPosition() + (RTrigger2 * .05));
                 grabright.setPosition(grabright.getPosition() - (RTrigger2 * .05));
             }
+
+
+
+
+            if (LBumper2){
+                grableft2.setPosition(.5);
+                grabright2.setPosition(.5);
+            }
+
+            if (RBumper2){
+                grableft2.setPosition(1);
+                grabright2.setPosition(0);
+            }
+
+
+
 
             if (dpadDOWN2) {
                 armpos -= 10;
