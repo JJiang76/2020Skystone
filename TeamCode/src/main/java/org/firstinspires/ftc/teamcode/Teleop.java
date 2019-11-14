@@ -18,8 +18,9 @@ public class Teleop extends LinearOpMode {
     Servo grabright;
     Servo grableft;
     Servo blockgrab;
-    Servo grableft2;
-    Servo grabright2;
+    Servo bord1;
+    Servo bord2;
+    Servo cap;
 
     int slidepos = 0;
     int armpos = 0;
@@ -39,9 +40,10 @@ public class Teleop extends LinearOpMode {
         //bottom two grabbers
         grabright = hardwareMap.get(Servo.class, "servo0");
         grableft = hardwareMap.get(Servo.class, "servo1");
-        //top two grabbers
-        grableft2 = hardwareMap.get(Servo.class, "servo3");
-        grabright2 = hardwareMap.get(Servo.class, "servo4");
+        //board srvos
+        bord1 = hardwareMap.get(Servo.class, "bord1");
+        bord2 = hardwareMap.get(Servo.class, "bord2");
+        cap = hardwareMap.get(Servo.class, "cap");
 
         rightfront.setDirection(DcMotor.Direction.REVERSE);
         rightback.setDirection(DcMotor.Direction.REVERSE);
@@ -62,8 +64,6 @@ public class Teleop extends LinearOpMode {
         //servo starting positions
         grableft.setPosition(.9);
         grabright.setPosition(0);
-        grableft2.setPosition(.6);
-        grabright2.setPosition(.4);
 
 
 
@@ -234,17 +234,14 @@ public class Teleop extends LinearOpMode {
 
 
 
-            if (LBumper2){
-                grableft2.setPosition(.5);
-                grabright2.setPosition(.5);
+            if (dpadRight2){
+                bord1.setPosition(0);
+                bord2.setPosition(.5);
             }
-
-            if (RBumper2){
-                grableft2.setPosition(1);
-                grabright2.setPosition(0);
+            if (dpadLeft2){
+                bord1.setPosition(.5);
+                bord2.setPosition(0);
             }
-
-
 
 
             if (dpadDOWN2) {
@@ -264,8 +261,14 @@ public class Teleop extends LinearOpMode {
             }
 
             if (x2) {
-                armpos = 300;
+                cap.setPosition(.4);
             }
+
+            if (y2) {
+                cap.setPosition(0);
+            }
+
+
 
             if (a1) {
                 resetMotors();
