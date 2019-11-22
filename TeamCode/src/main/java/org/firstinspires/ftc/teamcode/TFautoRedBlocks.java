@@ -56,6 +56,7 @@ public class TFautoRedBlocks extends LinearOpMode {
     Servo blockgrab;
     Servo grabright;
     Servo grableft;
+    Servo cap;
     int blockPosition = 69;
     final int TICKS_PER_INCH = 90;
     private static final String VUFORIA_KEY =
@@ -93,6 +94,7 @@ public class TFautoRedBlocks extends LinearOpMode {
 
         grabright = hardwareMap.get(Servo.class, "servo0");
         grableft = hardwareMap.get(Servo.class, "servo1");
+        cap = hardwareMap.get(Servo.class, "cap");
 
         rightfront.setDirection(DcMotor.Direction.REVERSE);
         rightback.setDirection(DcMotor.Direction.REVERSE);
@@ -106,6 +108,9 @@ public class TFautoRedBlocks extends LinearOpMode {
 
 
         waitForStart();
+
+        cap.setPosition(0);
+
         long time = System.currentTimeMillis();
         if (opModeIsActive()) {
             while (opModeIsActive() && blockPosition > 3) { //maybe add time limit to this as well
@@ -153,44 +158,43 @@ public class TFautoRedBlocks extends LinearOpMode {
         blockgrab.setPosition(1);
 
         if (blockPosition == 0) { //left skystone
-            left(13,1);
-            forward(30,1);
-            blockgrab.setPosition(.25);
-            sleep(500);
+            left(15,1);
+            forward(30,.75);
+            blockgrab.setPosition(0);
+            sleep(750);
             back(15,1);
             clock(21, 1);
         }
         else if (blockPosition == 1) { //mid skystone
-            left(3,1);
-            forward(30,1);
-            blockgrab.setPosition(.25);
-            sleep(500);
+            left(5,1);
+            forward(30,.75);
+            blockgrab.setPosition(0);
+            sleep(750);
             back(15,1);
             clock(21, 1);
         }
-        else if (blockPosition == 2) { //right skystone
-            right(9,1);
-            forward(30,1);
-            blockgrab.setPosition(.25);
-            sleep(500);
+        else { //right skystone
+            right(11,1);
+            forward(30,.75);
+            blockgrab.setPosition(0);
+            sleep(750);
             back(15,1);
             clock(21, 1);
         }
 
         //all 3 possibilities are alliged the same
 
-        forward(50, 1);
+        forward(58, 1);
         if (blockPosition == 0){
             forward(10,1);
         }
-        blockgrab.setPosition(.75);
-        back(75, 1);
+        blockgrab.setPosition(1);
+        back(83, 1);
         counter(23,1);
         left(3,1);
-        forward(20,1);
-        blockgrab.setPosition(.25);//block two grabbed
-        sleep(250);
-        right(3,1);
+        forward(18,.75);
+        blockgrab.setPosition(0);//block two grabbed
+        sleep(750);
         back(14,1);
         clock(22.5,1);
         forward(77,1);
@@ -200,6 +204,7 @@ public class TFautoRedBlocks extends LinearOpMode {
         blockgrab.setPosition(1);
         sleep(250);
         back(18,1);
+        left(27, 1);
 
 
 

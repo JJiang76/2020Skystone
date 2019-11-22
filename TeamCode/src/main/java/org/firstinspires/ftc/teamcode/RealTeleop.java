@@ -72,7 +72,6 @@ public class RealTeleop extends LinearOpMode {
         grabright = hardwareMap.get(Servo.class, "servo0");
         grableft = hardwareMap.get(Servo.class, "servo1");
         //top two grabbers
-        grableft2 = hardwareMap.get(Servo.class, "servo3");
         grabright2 = hardwareMap.get(Servo.class, "servo4");
 
         rightfront.setDirection(DcMotor.Direction.REVERSE);
@@ -89,8 +88,6 @@ public class RealTeleop extends LinearOpMode {
         //servo starting positions
         grableft.setPosition(.9);
         grabright.setPosition(0);
-        grableft2.setPosition(.6);
-        grabright2.setPosition(.4);
 
 
         double getLeftPos = 0;

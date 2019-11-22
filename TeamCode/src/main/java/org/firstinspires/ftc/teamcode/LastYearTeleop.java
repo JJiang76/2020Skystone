@@ -44,7 +44,7 @@ import com.qualcomm.robotcore.util.Range;
 
 import java.util.Set;
 
-
+@Disabled
 @TeleOp(name="TeleOp", group="Linear Opmode")
 public class LastYearTeleop extends LinearOpMode {
 

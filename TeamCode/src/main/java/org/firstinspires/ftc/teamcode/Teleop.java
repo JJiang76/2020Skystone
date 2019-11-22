@@ -260,13 +260,15 @@ public class Teleop extends LinearOpMode {
                 slidepos = 0;
             }
 
-            if (x2) {
+
+            if (!x2) {
                 cap.setPosition(.4);
             }
-
-            if (y2) {
-                cap.setPosition(0);
+            else {
+                cap.setPosition(.8);
             }
+
+
 
 
 

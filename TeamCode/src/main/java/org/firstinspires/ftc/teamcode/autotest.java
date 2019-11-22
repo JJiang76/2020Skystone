@@ -5,6 +5,7 @@ import com.disnodeteam.dogecv.detectors.BlankDetector;
 import com.disnodeteam.dogecv.detectors.skystone.SkystoneDetector;
 import com.disnodeteam.dogecv.detectors.skystone.StoneDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -23,6 +24,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import java.util.Locale;
 
+@Disabled
 @Autonomous(name = "camera baby")
 public class autotest extends LinearOpMode {
     OpenCvCamera camera;

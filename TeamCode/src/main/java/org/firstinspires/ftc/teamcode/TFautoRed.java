@@ -116,9 +116,6 @@ public class TFautoRed extends LinearOpMode {
 
         waitForStart();
 
-        //forward
-
-        SetPower(-.5, .5, .5, -.5);
 
         long time = System.currentTimeMillis();
         if (opModeIsActive()) {
@@ -133,7 +130,7 @@ public class TFautoRed extends LinearOpMode {
                         for (Recognition recognition : updatedRecognitions) {
 
                             if (recognition.getLabel().equals("Skystone")) {
-                                /*if (recognition.getLeft() < 40) {
+                                if (recognition.getLeft() < 40) {
                                     blockPosition = 0;
                                     break;
                                 }
@@ -143,20 +140,15 @@ public class TFautoRed extends LinearOpMode {
                                 }
                                 else{
                                     blockPosition = 1;
-                                } */
-
-                                SetPower(0, 0, 0, 0);
-                                right(4, .5);
+                                }
                             }
-                            /*
+
                             else if ((System.currentTimeMillis()-time)>2000){
                                 blockPosition = 1;
                                 telemetry.addLine("time limit reached");
                                 telemetry.update();
                                 break;
                             }
-
-                             */
                         }
 
                     } else {
@@ -172,11 +164,11 @@ public class TFautoRed extends LinearOpMode {
         telemetry.update();
 
         blockgrab.setPosition(1);
-/*
+
         if (blockPosition == 0) { //left skystone
             left(12,1);
             forward(30,1);
-            blockgrab.setPosition(.25);
+            blockgrab.setPosition(0);
             sleep(500);
             back(15,1);
             counter(21.7, 1);
@@ -186,7 +178,7 @@ public class TFautoRed extends LinearOpMode {
             //forward
             left(2,1);
             forward(30,1);
-            blockgrab.setPosition(.25);
+            blockgrab.setPosition(0);
             sleep(500);
             back(15,1);
             counter(21.5, 1);
@@ -197,26 +189,26 @@ public class TFautoRed extends LinearOpMode {
             right(9,1);
             //forward
             forward(30,1);
-            blockgrab.setPosition(.25);
+            blockgrab.setPosition(0);
             sleep(500);
             back(15,1);
             counter(21.5, 1);
         }
 
- */
+
 
 
 
         //all 3 possibilities are alliged the same
 
-        blockgrab.setPosition(.25);
+        blockgrab.setPosition(0);
         //go back
         //turn
         //drive all the way to opposite wall
 
 
         back(50, 1);
-        blockgrab.setPosition(.75);
+        blockgrab.setPosition(1);
         back(28, 1);
         //block dropped off and servo hopefully out of way
 
@@ -225,26 +217,12 @@ public class TFautoRed extends LinearOpMode {
         counter(22,1);
         blockgrab.setPosition(1);
         back(18,.75); //approaches mat
-        blockgrab.setPosition(.5);
-        sleep(500);
 
         bord1.setPosition(.5); //grabs board
         bord2.setPosition(0);
 
-        blockgrab.setPosition(1);
         forward(39,1); //backed up against wall(with hopefully mat)
 
-        //raise armboi back off of mat
-        blockgrab.setPosition(.7);//puts blockgrab against wall
-        armboi.setTargetPosition(2);
-        armboi.setPower(.5);
-        armboi.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        while (armboi.isBusy()) {} //use a sleep instead of while so program will continue regardless
-        armboi.setPower(0);
-        //servos default position
-        grableft.setPosition(.9);
-        grabright.setPosition(0);
-        blockgrab.setPosition(1);
 
         right(105,1);//go get another cube
 
@@ -252,14 +230,14 @@ public class TFautoRed extends LinearOpMode {
         counter(42, 1);//turn around
         forward(19,1);
         //right(1.5, 1);
-        blockgrab.setPosition(.25);
+        blockgrab.setPosition(1);
         sleep(500);
         //another block grabbed
 
         back(16,1);
         clock(22, 1);
         forward(60, 1); //drives to line
-        blockgrab.setPosition(1);
+        blockgrab.setPosition(0);
         back(19, 1);
 
 

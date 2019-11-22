@@ -156,7 +156,7 @@ public class TFautoBlue extends LinearOpMode {
         if (blockPosition == 0) { //left skystone
             left(14,1);
             forward(30,1);
-            blockgrab.setPosition(.25);
+            blockgrab.setPosition(0);
             sleep(500);
             back(15,1);
             clock(21.5, 1);
@@ -165,7 +165,7 @@ public class TFautoBlue extends LinearOpMode {
             //forward
             left(5,1);
             forward(30,1);
-            blockgrab.setPosition(.25);
+            blockgrab.setPosition(0);
             sleep(500);
             back(15,1);
             clock(21.5, 1);
@@ -176,7 +176,7 @@ public class TFautoBlue extends LinearOpMode {
             right(8,1);
             //forward
             forward(30,1);
-            blockgrab.setPosition(.25);
+            blockgrab.setPosition(0);
             sleep(500);
             back(14,1);
             clock(21.5, 1);
@@ -186,15 +186,15 @@ public class TFautoBlue extends LinearOpMode {
         //all 3 possibilities are alliged the same
 
         back(50, 1);
-        blockgrab.setPosition(.75);
+        blockgrab.setPosition(1);
         back(28, 1);
         //block dropped off and servo hopefully out of way
 
         clock(22,1);
-        blockgrab.setPosition(1);
+        //blockgrab.setPosition(1);
         back(18,.75); //approaches mat
-        blockgrab.setPosition(.5);
-        sleep(500);
+        //blockgrab.setPosition(.5);
+        //sleep(500);
 
         //opens servos and lowers arm boi onto mat
         grableft.setPosition(.463);
@@ -211,7 +211,7 @@ public class TFautoBlue extends LinearOpMode {
         forward(39,1); //backed up against wall(with hopefully mat)
 
         //raise armboi back off of mat
-        blockgrab.setPosition(.7);//puts blockgrab against wall
+       // blockgrab.setPosition(.7);//puts blockgrab against wall
         armboi.setTargetPosition(2);
         armboi.setPower(.5);
         armboi.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -228,7 +228,7 @@ public class TFautoBlue extends LinearOpMode {
         clock(42, 1);//turn around
         forward(19,1);
         //right(1.5, 1);
-        blockgrab.setPosition(.25);
+        blockgrab.setPosition(0);
         sleep(500);
         //another block grabbed
 
