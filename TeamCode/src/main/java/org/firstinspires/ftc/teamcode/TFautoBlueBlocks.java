@@ -53,7 +53,7 @@ public class TFautoBlueBlocks extends LinearOpMode {
     DcMotor rightback;
     DcMotor armboi;
     DcMotor slide;
-    Servo blockgrab;
+    Servo blockgrabBlue;
     Servo grabright;
     Servo grableft;
     Servo cap;
@@ -88,7 +88,7 @@ public class TFautoBlueBlocks extends LinearOpMode {
         leftfront = hardwareMap.get(DcMotor.class, "leftfront");
         leftback = hardwareMap.get(DcMotor.class, "leftback");
         rightback = hardwareMap.get(DcMotor.class, "rightback");
-        blockgrab = hardwareMap.get(Servo.class, "servo2");
+        blockgrabBlue = hardwareMap.get(Servo.class, "servo2");
         armboi = hardwareMap.get(DcMotor.class, "armboi");
         slide = hardwareMap.get(DcMotor.class,"armboislides");
 
@@ -161,12 +161,12 @@ public class TFautoBlueBlocks extends LinearOpMode {
         telemetry.addData("block position out loop", blockPosition);
         telemetry.update();
 
-        blockgrab.setPosition(1);
+        blockgrabBlue.setPosition(1);
 
         if (blockPosition == 0) { //left skystone
             left(15,1);
             forward(30,.75);
-            blockgrab.setPosition(0);
+            blockgrabBlue.setPosition(0);
             sleep(750);
             back(15,1);
             counter(22, 1);
@@ -175,7 +175,7 @@ public class TFautoBlueBlocks extends LinearOpMode {
             //forward
             left(7,1);
             forward(30,.75);
-            blockgrab.setPosition(0);
+            blockgrabBlue.setPosition(0);
             sleep(750);
             back(15,1);
             counter(22, 1);
@@ -185,7 +185,7 @@ public class TFautoBlueBlocks extends LinearOpMode {
             right(8,1);
             //forward
             forward(30,.75);
-            blockgrab.setPosition(0);
+            blockgrabBlue.setPosition(0);
             sleep(750);
             back(15,1);
             counter(22, 1);
@@ -197,7 +197,7 @@ public class TFautoBlueBlocks extends LinearOpMode {
         if (blockPosition == 2) {
             forward(5, 1);
         }
-        blockgrab.setPosition(1);
+        blockgrabBlue.setPosition(1);
         back(71.5, 1);
         clock(21.5,1);
         if (blockPosition == 2) {
@@ -205,12 +205,12 @@ public class TFautoBlueBlocks extends LinearOpMode {
         }
 
         forward(17,.75);
-        blockgrab.setPosition(0);//block two grabbed
+        blockgrabBlue.setPosition(0);//block two grabbed
         sleep(750);
         back(14,1);
         counter(22,1);
         forward(75,1);
-        blockgrab.setPosition(1);
+        blockgrabBlue.setPosition(1);
         sleep(250);
         back(18,1);
 

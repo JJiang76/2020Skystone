@@ -41,7 +41,7 @@ public class Auto extends LinearOpMode {
     DcMotor slide;
     Servo grabright;
     Servo grableft;
-    Servo blockgrab;
+    Servo blockgrabBlue;
     WebcamName webcam;
     SkystoneDetector detector;
 
@@ -95,7 +95,7 @@ public class Auto extends LinearOpMode {
 
         grabright = hardwareMap.get(Servo.class, "servo0");
         grableft = hardwareMap.get(Servo.class, "servo1");
-        blockgrab = hardwareMap.get(Servo.class, "servo2");
+        blockgrabBlue = hardwareMap.get(Servo.class, "servo2");
 
         webcam = hardwareMap.get(WebcamName.class, "Webcam 1");
 
@@ -306,19 +306,19 @@ public class Auto extends LinearOpMode {
             }
         }*/
 
-        blockgrab.setPosition(0);
+        blockgrabBlue.setPosition(0);
         forward(15, 1);
 
         left(10, .75);
         forward(9.5, 1);
-        blockgrab.setPosition(.6);
+        blockgrabBlue.setPosition(.6);
         sleep(1000);
         back(8,1);
         clock(22.2, 1);
 
         forward(75, 1);
         //DROP BLOCK
-        blockgrab.setPosition(-.5);
+        blockgrabBlue.setPosition(-.5);
         forward(17,1);
         counter(22.2222,1);
         forward(8,1);

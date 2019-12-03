@@ -34,7 +34,7 @@ public class autotest extends LinearOpMode {
     DcMotor leftback;
     DcMotor rightback;
     DcMotor armboi;
-    Servo blockgrab;
+    Servo blockgrabBlue;
     Servo grabright;
     Servo grableft;
     final int TICKS_PER_INCH = 90;
@@ -45,7 +45,7 @@ public class autotest extends LinearOpMode {
         leftfront = hardwareMap.get(DcMotor.class, "leftfront");
         leftback = hardwareMap.get(DcMotor.class, "leftback");
         rightback = hardwareMap.get(DcMotor.class, "rightback");
-        blockgrab = hardwareMap.get(Servo.class, "servo2");
+        blockgrabBlue = hardwareMap.get(Servo.class, "servo2");
         armboi = hardwareMap.get(DcMotor.class, "armboi");
 
         grabright = hardwareMap.get(Servo.class, "servo0");
@@ -82,7 +82,7 @@ public class autotest extends LinearOpMode {
 
         waitForStart();
 
-        blockgrab.setPosition(1);
+        blockgrabBlue.setPosition(1);
         forward(29, 1);
         camera.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
 

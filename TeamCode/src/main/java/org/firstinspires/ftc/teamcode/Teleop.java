@@ -5,22 +5,12 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.exception.TargetPositionNotSetException;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+import static org.firstinspires.ftc.teamcode.Robot.*;
 
 
 @TeleOp(name = "testop")
 public class Teleop extends LinearOpMode {
-    DcMotor armboi;
-    DcMotor rightfront;
-    DcMotor leftfront;
-    DcMotor leftback;
-    DcMotor rightback;
-    DcMotor slide;
-    Servo grabright;
-    Servo grableft;
-    Servo blockgrab;
-    Servo bord1;
-    Servo bord2;
-    Servo cap;
+
 
     int slidepos = 0;
     int armpos = 0;
@@ -36,7 +26,7 @@ public class Teleop extends LinearOpMode {
         slide = hardwareMap.get(DcMotor.class,"armboislides");
 
         //autonomous arm
-        blockgrab = hardwareMap.get(Servo.class, "servo2");
+        blockgrabBlue = hardwareMap.get(Servo.class, "servo2");
         //bottom two grabbers
         grabright = hardwareMap.get(Servo.class, "servo0");
         grableft = hardwareMap.get(Servo.class, "servo1");
@@ -189,10 +179,10 @@ public class Teleop extends LinearOpMode {
 
             //autonomous servo
             if (x1) { //down
-                blockgrab.setPosition(.5);
+                blockgrabBlue.setPosition(.5);
             }
             if (y1) { //up (starting)
-                blockgrab.setPosition(1);
+                blockgrabBlue.setPosition(1);
             }
 
             //controller 2////////////////////////////////////////////////////////////////////////////////

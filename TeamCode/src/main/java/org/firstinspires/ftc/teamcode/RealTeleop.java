@@ -2,43 +2,23 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.exception.TargetPositionNotSetException;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
+import static org.firstinspires.ftc.teamcode.Robot.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
+
 @TeleOp(name = "teleoperation")
 public class RealTeleop extends LinearOpMode {
-    private static final String TFOD_MODEL_ASSET = "Skystone.tflite";
-    private static final String LABEL_FIRST_ELEMENT = "Stone";
-    private static final String LABEL_SECOND_ELEMENT = "Skystone";
-
-    private static final String VUFORIA_KEY =
-            "Af+w9bD/////AAABmRAQ4PuIw0sdh/byTqA444Jo20dWZi+e6ZOHAsur5coDrAZ2k0LohL3kbR4Toa0yyYSOgCLXvIlm1ne8ZdjMTbVzEvsG0cfOrr3zHqV94jRsRa+sfeyeiTlEZFwz22a3eJX0CI5ga1JRfVaY8f3h1Kf6oxZbSF9rHraCjV1+egDARh4QmNWWHS0DKZi64hLwAu7P4NWsFFHN95eRdz3P7t4eQIZwX8vtAedGEkTM3V3tO8aYFcQ1MEPgHL+B+CTleFScXD8gjoMjCrVeZ4qNfkVda3bR3IUZSp8XaoL9GMy5irmgLJBNeo/H9qq3yFelSUIQMCZ1awAecpV6oHS3yAeaL8J+Bwe2/ZplShgiGPzS";
-    private VuforiaLocalizer vuforia;
-    private TFObjectDetector tfod;
-
-
-    DcMotor armboi;
-    DcMotor rightfront;
-    DcMotor leftfront;
-    DcMotor leftback;
-    DcMotor rightback;
-    DcMotor slide;
-    Servo grabright;
-    Servo grableft;
-    Servo blockgrab;
-    Servo grableft2;
-    Servo grabright2;
+    
+    
 
     ArrayList<String> info = new ArrayList<>();
     String dir = "";
@@ -49,37 +29,17 @@ public class RealTeleop extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        initVuforia();
+        initVuforia(this);
         if (ClassFactory.getInstance().canCreateTFObjectDetector()) {
-            initTfod();
+            initTfod(this);
         } else {
             telemetry.addData("Sorry!", "This device is not compatible with TFOD");
         }
-        if (tfod != null) {
+        if (Robot.tfod != null) {
             tfod.activate();
         }
 
-        rightfront = hardwareMap.get(DcMotor.class, "rightfront");
-        leftfront = hardwareMap.get(DcMotor.class, "leftfront");
-        leftback = hardwareMap.get(DcMotor.class, "leftback");
-        rightback = hardwareMap.get(DcMotor.class, "rightback");
-        armboi = hardwareMap.get(DcMotor.class, "armboi");
-        slide = hardwareMap.get(DcMotor.class,"armboislides");
-
-        //autonomous arm
-        blockgrab = hardwareMap.get(Servo.class, "servo2");
-        //bottom two grabbers
-        grabright = hardwareMap.get(Servo.class, "servo0");
-        grableft = hardwareMap.get(Servo.class, "servo1");
-        //top two grabbers
-        grabright2 = hardwareMap.get(Servo.class, "servo4");
-
-        rightfront.setDirection(DcMotor.Direction.REVERSE);
-        rightback.setDirection(DcMotor.Direction.REVERSE);
-        leftback.setDirection(DcMotor.Direction.FORWARD);
-        leftfront.setDirection(DcMotor.Direction.FORWARD);
-        armboi.setDirection(DcMotor.Direction.REVERSE);
-
+        intMotors(this);
 
         resetMotors();
 
@@ -108,6 +68,10 @@ public class RealTeleop extends LinearOpMode {
             double LTrigger1 = -gamepad1.left_trigger / 2;
             double RTrigger1 = -gamepad1.right_trigger / 2;
 
+            boolean dpadUp1 = gamepad1.dpad_up;
+            boolean dpadRight1 = gamepad1.dpad_right;
+            boolean dpadLeft1 = gamepad1.dpad_left;
+            boolean dpadDown1 = gamepad1.dpad_down;
 
             boolean a2 = gamepad2.a;
             boolean b2 = gamepad2.b;
@@ -122,11 +86,7 @@ public class RealTeleop extends LinearOpMode {
             double RStickY2 = -gamepad2.right_stick_y;
             double RStickX2 = gamepad2.right_stick_x;
             double LStickY2 = -gamepad2.left_stick_y;
-
-            boolean dpadUp1 = gamepad1.dpad_up;
-            boolean dpadRight1 = gamepad1.dpad_right;
-            boolean dpadLeft1 = gamepad1.dpad_left;
-            boolean dpadDown1 = gamepad1.dpad_down;
+            
 
             boolean dpadUP2 = gamepad2.dpad_up;
             boolean dpadDOWN2 =gamepad2.dpad_down;
@@ -196,10 +156,10 @@ public class RealTeleop extends LinearOpMode {
 
             //autonomous servo
             if (x1) { //down
-                blockgrab.setPosition(.5);
+                blockgrabBlue.setPosition(.5);
             }
             if (y1) { //up (starting)
-                blockgrab.setPosition(1);
+                blockgrabBlue.setPosition(1);
             }
 
 
@@ -266,47 +226,6 @@ public class RealTeleop extends LinearOpMode {
         rightback.setPower(-RBPower);
     }
 
-    public void resetMotors() {
-        leftfront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightfront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftback.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightback.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        leftfront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightfront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftback.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightback.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
-
-    /**
-     * Initialize the Vuforia localization engine.
-     */
-    private void initVuforia() {
-        /*
-         * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
-         */
-        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
-
-        parameters.vuforiaLicenseKey = VUFORIA_KEY;
-        parameters.cameraName = hardwareMap.get(WebcamName.class, "Webcam 1");
-
-        //  Instantiate the Vuforia engine
-        vuforia = ClassFactory.getInstance().createVuforia(parameters);
-
-        // Loading trackables is not necessary for the TensorFlow Object Detection engine.
-    }
-
-    /**
-     * Initialize the TensorFlow Object Detection engine.
-     */
-    private void initTfod() {
-        int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
-                "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
-        tfodParameters.minimumConfidence = 0.4;
-        tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
-        tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_FIRST_ELEMENT, LABEL_SECOND_ELEMENT);
-    }
 
 }
 

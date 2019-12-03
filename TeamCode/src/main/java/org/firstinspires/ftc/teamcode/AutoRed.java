@@ -14,7 +14,7 @@ public class AutoRed extends LinearOpMode {
     DcMotor leftback;
     DcMotor rightback;
     DcMotor armboi;
-    Servo blockgrab;
+    Servo blockgrabBlue;
     Servo grabright;
     Servo grableft;
 
@@ -30,7 +30,7 @@ public class AutoRed extends LinearOpMode {
         leftfront = hardwareMap.get(DcMotor.class, "leftfront");
         leftback = hardwareMap.get(DcMotor.class, "leftback");
         rightback = hardwareMap.get(DcMotor.class, "rightback");
-        blockgrab = hardwareMap.get(Servo.class, "servo2");
+        blockgrabBlue = hardwareMap.get(Servo.class, "servo2");
         armboi = hardwareMap.get(DcMotor.class, "armboi");
 
         grabright = hardwareMap.get(Servo.class, "servo0");
@@ -46,9 +46,9 @@ public class AutoRed extends LinearOpMode {
 
         waitForStart();
 
-        blockgrab.setPosition(1);
+        blockgrabBlue.setPosition(1);
         forward(29, 1); //approaches  a block
-        blockgrab.setPosition(.25);
+        blockgrabBlue.setPosition(.25);
         sleep(500);
         //block grabbed
 
@@ -56,14 +56,14 @@ public class AutoRed extends LinearOpMode {
         back(14,1);
         counter(21.5, 1);
         back(50, 1);
-        blockgrab.setPosition(.5);
+        blockgrabBlue.setPosition(.5);
         back(29, 1);
         //block dropped off and servo hopefully out of way
 
         counter(22,1);
-        blockgrab.setPosition(1);
+        blockgrabBlue.setPosition(1);
         back(16,.75); //approaches mat
-        blockgrab.setPosition(.5);
+        blockgrabBlue.setPosition(.5);
         sleep(500);
 
         //opens servos and lowers arm boi onto mat
@@ -77,11 +77,11 @@ public class AutoRed extends LinearOpMode {
         while (armboi.isBusy()) {} //use a sleep instead of while so program will continue regardless
         armboi.setPower(0);
 
-        blockgrab.setPosition(1);
+        blockgrabBlue.setPosition(1);
         forward(36,1); //backed up against wall(with hopefully mat)
 
         //raise armboi back off of mat
-        blockgrab.setPosition(.7);//puts blockgrab against wall
+        blockgrabBlue.setPosition(.7);//puts blockgrabBlue against wall
         armboi.setTargetPosition(2);
         armboi.setPower(.5);
         armboi.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -90,21 +90,21 @@ public class AutoRed extends LinearOpMode {
         //servos default position
         grableft.setPosition(.9);
         grabright.setPosition(0);
-        blockgrab.setPosition(1);
+        blockgrabBlue.setPosition(1);
 
         right(105,1);//go get another cube
 
         back(10,1);
         counter(44, 1);//turn around
         forward(19,1);
-        blockgrab.setPosition(.25);
+        blockgrabBlue.setPosition(.25);
         sleep(500);
         //another block grabbed
 
         back(16,1);
         clock(22, 1);
         forward(60, 1); //drives to line
-        blockgrab.setPosition(1);
+        blockgrabBlue.setPosition(1);
         back(18, 1);
     }
 

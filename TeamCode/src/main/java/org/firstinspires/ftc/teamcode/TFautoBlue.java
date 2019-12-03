@@ -53,7 +53,7 @@ public class TFautoBlue extends LinearOpMode {
     DcMotor rightback;
     DcMotor armboi;
     DcMotor slide;
-    Servo blockgrab;
+    Servo blockgrabBlue;
     Servo grabright;
     Servo grableft;
     int blockPosition = 69;
@@ -87,7 +87,7 @@ public class TFautoBlue extends LinearOpMode {
         leftfront = hardwareMap.get(DcMotor.class, "leftfront");
         leftback = hardwareMap.get(DcMotor.class, "leftback");
         rightback = hardwareMap.get(DcMotor.class, "rightback");
-        blockgrab = hardwareMap.get(Servo.class, "servo2");
+        blockgrabBlue = hardwareMap.get(Servo.class, "servo2");
         armboi = hardwareMap.get(DcMotor.class, "armboi");
         slide = hardwareMap.get(DcMotor.class,"armboislides");
 
@@ -151,12 +151,12 @@ public class TFautoBlue extends LinearOpMode {
         telemetry.addData("block position out loop", blockPosition);
         telemetry.update();
 
-        blockgrab.setPosition(1);
+        blockgrabBlue.setPosition(1);
 
         if (blockPosition == 0) { //left skystone
             left(14,1);
             forward(30,1);
-            blockgrab.setPosition(0);
+            blockgrabBlue.setPosition(0);
             sleep(500);
             back(15,1);
             clock(21.5, 1);
@@ -165,7 +165,7 @@ public class TFautoBlue extends LinearOpMode {
             //forward
             left(5,1);
             forward(30,1);
-            blockgrab.setPosition(0);
+            blockgrabBlue.setPosition(0);
             sleep(500);
             back(15,1);
             clock(21.5, 1);
@@ -176,7 +176,7 @@ public class TFautoBlue extends LinearOpMode {
             right(8,1);
             //forward
             forward(30,1);
-            blockgrab.setPosition(0);
+            blockgrabBlue.setPosition(0);
             sleep(500);
             back(14,1);
             clock(21.5, 1);
@@ -186,14 +186,14 @@ public class TFautoBlue extends LinearOpMode {
         //all 3 possibilities are alliged the same
 
         back(50, 1);
-        blockgrab.setPosition(1);
+        blockgrabBlue.setPosition(1);
         back(28, 1);
         //block dropped off and servo hopefully out of way
 
         clock(22,1);
-        //blockgrab.setPosition(1);
+        //blockgrabBlue.setPosition(1);
         back(18,.75); //approaches mat
-        //blockgrab.setPosition(.5);
+        //blockgrabBlue.setPosition(.5);
         //sleep(500);
 
         //opens servos and lowers arm boi onto mat
@@ -207,11 +207,11 @@ public class TFautoBlue extends LinearOpMode {
         while (armboi.isBusy()) {} //use a sleep instead of while so program will continue regardless
         armboi.setPower(0);
 
-        blockgrab.setPosition(1);
+        blockgrabBlue.setPosition(1);
         forward(39,1); //backed up against wall(with hopefully mat)
 
         //raise armboi back off of mat
-       // blockgrab.setPosition(.7);//puts blockgrab against wall
+       // blockgrabBlue.setPosition(.7);//puts blockgrabBlue against wall
         armboi.setTargetPosition(2);
         armboi.setPower(.5);
         armboi.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -220,7 +220,7 @@ public class TFautoBlue extends LinearOpMode {
         //servos default position
         grableft.setPosition(.9);
         grabright.setPosition(0);
-        blockgrab.setPosition(1);
+        blockgrabBlue.setPosition(1);
 
         left(107,1);//go get another cube
 
@@ -228,14 +228,14 @@ public class TFautoBlue extends LinearOpMode {
         clock(42, 1);//turn around
         forward(19,1);
         //right(1.5, 1);
-        blockgrab.setPosition(0);
+        blockgrabBlue.setPosition(0);
         sleep(500);
         //another block grabbed
 
         back(16,1);
         counter(22, 1);
         forward(60, 1); //drives to line
-        blockgrab.setPosition(1);
+        blockgrabBlue.setPosition(1);
         back(19, 1);
 
 

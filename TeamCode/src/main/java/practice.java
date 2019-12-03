@@ -10,7 +10,7 @@ public class practice extends LinearOpMode {
     DcMotor leftback;
     DcMotor rightback;
     DcMotor armboi;
-    Servo blockgrab;
+    Servo blockgrabBlue;
     Servo grabright;
     Servo grableft;
 

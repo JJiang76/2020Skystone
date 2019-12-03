@@ -54,7 +54,7 @@ public class TFautoRed extends LinearOpMode {
     DcMotor rightback;
     DcMotor armboi;
     DcMotor slide;
-    Servo blockgrab;
+    Servo blockgrabBlue;
     Servo grabright;
     Servo grableft;
     Servo bord1;
@@ -93,7 +93,7 @@ public class TFautoRed extends LinearOpMode {
         leftfront = hardwareMap.get(DcMotor.class, "leftfront");
         leftback = hardwareMap.get(DcMotor.class, "leftback");
         rightback = hardwareMap.get(DcMotor.class, "rightback");
-        blockgrab = hardwareMap.get(Servo.class, "servo2");
+        blockgrabBlue = hardwareMap.get(Servo.class, "servo2");
         armboi = hardwareMap.get(DcMotor.class, "armboi");
         slide = hardwareMap.get(DcMotor.class,"armboislides");
 
@@ -163,12 +163,12 @@ public class TFautoRed extends LinearOpMode {
         telemetry.addData("block position out loop", blockPosition);
         telemetry.update();
 
-        blockgrab.setPosition(1);
+        blockgrabBlue.setPosition(1);
 
         if (blockPosition == 0) { //left skystone
             left(12,1);
             forward(30,1);
-            blockgrab.setPosition(0);
+            blockgrabBlue.setPosition(0);
             sleep(500);
             back(15,1);
             counter(21.7, 1);
@@ -178,7 +178,7 @@ public class TFautoRed extends LinearOpMode {
             //forward
             left(2,1);
             forward(30,1);
-            blockgrab.setPosition(0);
+            blockgrabBlue.setPosition(0);
             sleep(500);
             back(15,1);
             counter(21.5, 1);
@@ -189,7 +189,7 @@ public class TFautoRed extends LinearOpMode {
             right(9,1);
             //forward
             forward(30,1);
-            blockgrab.setPosition(0);
+            blockgrabBlue.setPosition(0);
             sleep(500);
             back(15,1);
             counter(21.5, 1);
@@ -201,21 +201,21 @@ public class TFautoRed extends LinearOpMode {
 
         //all 3 possibilities are alliged the same
 
-        blockgrab.setPosition(0);
+        blockgrabBlue.setPosition(0);
         //go back
         //turn
         //drive all the way to opposite wall
 
 
         back(50, 1);
-        blockgrab.setPosition(1);
+        blockgrabBlue.setPosition(1);
         back(28, 1);
         //block dropped off and servo hopefully out of way
 
 
         //turns to face the mat
         counter(22,1);
-        blockgrab.setPosition(1);
+        blockgrabBlue.setPosition(1);
         back(18,.75); //approaches mat
 
         bord1.setPosition(.5); //grabs board
@@ -230,14 +230,14 @@ public class TFautoRed extends LinearOpMode {
         counter(42, 1);//turn around
         forward(19,1);
         //right(1.5, 1);
-        blockgrab.setPosition(1);
+        blockgrabBlue.setPosition(1);
         sleep(500);
         //another block grabbed
 
         back(16,1);
         clock(22, 1);
         forward(60, 1); //drives to line
-        blockgrab.setPosition(0);
+        blockgrabBlue.setPosition(0);
         back(19, 1);
 
 

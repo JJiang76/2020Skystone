@@ -43,18 +43,19 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import static org.firstinspires.ftc.teamcode.Robot.*;
 
-@Autonomous(name = "Bad Blue Blocks")
-public class BadBlueBlocks extends LinearOpMode {
+@Autonomous(name = "Bad Red Blocks")
+public class BadRedBlocks extends LinearOpMode {
 
 
 
     @Override
     public void runOpMode() {
 
-        final double UP = 1; //servo up position
-        final double DOWN = 0; //servo down position
+        final double UP = 0; //servo up position
+        final double DOWN = 1; //servo down position
 
         Robot.intMotors(this);
+
 
 ////////Program start////////////////////////////////////////////////////////////////////////
         waitForStart();
@@ -104,7 +105,7 @@ public class BadBlueBlocks extends LinearOpMode {
             }
         }
 
-        right(14,.5);//strafe to scan 2
+        left(14,.5);//strafe to scan 2
 
         //scan 2
         time = System.currentTimeMillis(); //activates timer
@@ -141,11 +142,11 @@ public class BadBlueBlocks extends LinearOpMode {
         //calculates skystone position
         if (scan1 && scan2){
             //blockposition 1
-            left(11.2,.5);
+            right(11.2,.5);
         }
         else if (scan1){
             //blockpos 0
-            left(22,.5);
+            right(22,.5);
         }
         else {
             //blockpos 2
@@ -156,41 +157,41 @@ public class BadBlueBlocks extends LinearOpMode {
 
         //go and grab skystone
         forward(22,1);
-        blockgrabBlue.setPosition(DOWN); //block grabbed
+        blockgrabRed.setPosition(DOWN); //block grabbed
         sleep(750);
         back(15,1);
 
         //return to centered position
         if (scan1 && scan2){
             //blockpos1
-            left(8.8,.5);
+            right(8.8,.5);
         }
         else if (scan1){
             //blockpos0
         }
         else {
             //blockpos 2
-            left(22,.5);
+            right(22,.5);
         }
 
         //////////aligned with block in same position every time/////////////////////////////////
 
-        counter(DEG90,1);
+        clock(DEG90+1,1);
         forward(40,1);
-        blockgrabBlue.setPosition(UP);
+        blockgrabRed.setPosition(UP);
         sleep(500);
         back(70,1);
-        clock(DEG90,1);
-        right(11,.4); //strafe into wall
+        counter(DEG90,1);
+        left(11,.4); //strafe into wall
         sleep(100);
 
         if (scan1 && scan2){
             //blockposition 1
-            left(11.2,.5);
+            right(11.2,.5);
         }
         else if (scan1){
             //blockpos 0
-            left(21,.5);
+            right(22,.5);
         }
         else {
             //blockpos 2
@@ -198,27 +199,27 @@ public class BadBlueBlocks extends LinearOpMode {
         }
 
         //go and grab skystone 2
-        forward(19.5,1);
-        blockgrabBlue.setPosition(DOWN); //block 2 grabbed
+        forward(17,1);
+        blockgrabRed.setPosition(DOWN); //block 2 grabbed
         sleep(500);
         back(12,1);
 
         //return to centered position
         if (scan1 && scan2){
             //blockpos1
-            left(8.8,.5);
+            right(8.8,.5);
         }
         else if (scan1){
             //blockpos0
         }
         else {
             //blockpos 2
-            left(22,.5);
+            right(22,.5);
         }
 
-        counter(DEG90 + 1,1);
-        forward(53,1);
-        blockgrabBlue.setPosition(UP);
+        clock(DEG90,1);
+        forward(55,1);
+        blockgrabRed.setPosition(UP);
         sleep(200);
         back(13,1);
 
