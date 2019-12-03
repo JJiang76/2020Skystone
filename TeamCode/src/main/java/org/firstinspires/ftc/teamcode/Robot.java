@@ -50,13 +50,12 @@ public class Robot {
         armboi = opMode.hardwareMap.get(DcMotor.class, "armboi");
         slide = opMode.hardwareMap.get(DcMotor.class,"armboislides");
 
-        //autonomous arm
+        //autonomous arms
         blockgrabBlue = opMode.hardwareMap.get(Servo.class, "servo2");
         blockgrabRed = opMode.hardwareMap.get(Servo.class, "servo4");
         //bottom two grabbers
         grabright = opMode.hardwareMap.get(Servo.class, "servo0");
         grableft = opMode.hardwareMap.get(Servo.class, "servo1");
-
 
 
         rightfront.setDirection(DcMotor.Direction.REVERSE);
