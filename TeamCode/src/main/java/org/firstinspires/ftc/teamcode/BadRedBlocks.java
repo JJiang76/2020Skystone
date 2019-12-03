@@ -182,7 +182,7 @@ public class BadRedBlocks extends LinearOpMode {
         sleep(500);
         back(70,1);
         counter(DEG90,1);
-        left(11,.4); //strafe into wall
+        left(12,.4); //strafe into wall
         sleep(100);
 
         if (scan1 && scan2){
@@ -199,7 +199,7 @@ public class BadRedBlocks extends LinearOpMode {
         }
 
         //go and grab skystone 2
-        forward(17,1);
+        forward(15,1);
         blockgrabRed.setPosition(DOWN); //block 2 grabbed
         sleep(500);
         back(12,1);
