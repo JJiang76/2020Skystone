@@ -156,7 +156,8 @@ public class BadRedBlocks extends LinearOpMode {
 
 
         //go and grab skystone
-        forward(22,1);
+        forward(19,1);
+        forward(3,.5);
         blockgrabRed.setPosition(DOWN); //block grabbed
         sleep(750);
         back(15,1);
@@ -176,7 +177,7 @@ public class BadRedBlocks extends LinearOpMode {
 
         //////////aligned with block in same position every time/////////////////////////////////
 
-        clock(DEG90+1,1);
+        clock(DEG90,1);
         forward(40,1);
         blockgrabRed.setPosition(UP);
         sleep(500);
@@ -187,11 +188,11 @@ public class BadRedBlocks extends LinearOpMode {
 
         if (scan1 && scan2){
             //blockposition 1
-            right(11.2,.5);
+            right(10,.5);
         }
         else if (scan1){
             //blockpos 0
-            right(22,.5);
+            right(18,.5);
         }
         else {
             //blockpos 2
@@ -199,7 +200,7 @@ public class BadRedBlocks extends LinearOpMode {
         }
 
         //go and grab skystone 2
-        forward(15,1);
+        forward(13,1);
         blockgrabRed.setPosition(DOWN); //block 2 grabbed
         sleep(500);
         back(12,1);
@@ -207,18 +208,18 @@ public class BadRedBlocks extends LinearOpMode {
         //return to centered position
         if (scan1 && scan2){
             //blockpos1
-            right(8.8,.5);
+            right(8,.5);
         }
         else if (scan1){
             //blockpos0
         }
         else {
             //blockpos 2
-            right(22,.5);
+            right(18,.5);
         }
 
         clock(DEG90,1);
-        forward(55,1);
+        forward(59,1);
         blockgrabRed.setPosition(UP);
         sleep(200);
         back(13,1);

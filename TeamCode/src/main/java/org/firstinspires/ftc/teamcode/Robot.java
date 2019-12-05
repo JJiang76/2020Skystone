@@ -163,6 +163,7 @@ public class Robot {
         rightback.setPower(0);
         leftfront.setPower(0);
         leftback.setPower(0);
+
     }
 
     public static void SetPower(double LFPower, double RFPower, double LBPower, double RBPower) {

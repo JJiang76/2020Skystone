@@ -32,7 +32,6 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
@@ -144,13 +143,14 @@ public class BadBlueBlocks extends LinearOpMode {
         }
         else {
             //blockpos 2
-
+            left(3,.5);
         }
 
 
 
         //go and grab skystone
-        forward(22,1);
+        forward(20,1);
+        forward(2,.5);
         blockgrabBlue.setPosition(DOWN); //block grabbed
         sleep(750);
         back(15,1);
@@ -165,15 +165,17 @@ public class BadBlueBlocks extends LinearOpMode {
         }
         else {
             //blockpos 2
-            left(22,.5);
+            left(19,.5);
         }
 
         //////////aligned with block in same position every time/////////////////////////////////
 
-        counter(DEG90,1);
+        counter(DEG90+.5,1);
+        sleep(50);
         forward(40,1);
+        sleep(100);
         blockgrabBlue.setPosition(UP);
-        sleep(500);
+        sleep(600);
         back(70,1);
         clock(DEG90,1);
         right(11,.4); //strafe into wall
@@ -193,7 +195,8 @@ public class BadBlueBlocks extends LinearOpMode {
         }
 
         //go and grab skystone 2
-        forward(19.5,1);
+        forward(17,1);
+        forward(2,.5);
         blockgrabBlue.setPosition(DOWN); //block 2 grabbed
         sleep(500);
         back(12,1);
