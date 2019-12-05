@@ -194,6 +194,7 @@ public class BadBlueBlocks extends LinearOpMode {
 
         }
 
+
         //go and grab skystone 2
         forward(17,1);
         forward(2,.5);
