@@ -42,6 +42,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+@Disabled
 @Autonomous(name = "TF auto blue blocks")
 public class TFautoBlueBlocks extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "Skystone.tflite";

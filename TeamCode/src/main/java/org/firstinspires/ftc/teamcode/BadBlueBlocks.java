@@ -37,6 +37,7 @@ import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import static org.firstinspires.ftc.teamcode.Robot.*;
 
+
 @Autonomous(name = "Bad Blue Blocks")
 public class BadBlueBlocks extends LinearOpMode {
 
@@ -111,7 +112,7 @@ public class BadBlueBlocks extends LinearOpMode {
                     if (updatedRecognitions != null) {
                         // step through the list of recognitions and display boundary info.
                         for (Recognition recognition : updatedRecognitions) {
-                            if (recognition.getLabel().equals("Skystone")) {
+                            if (recognition.getLabel().equals("Skystone") && recognition.getRight() > 30) {
                                 scan2 = true;
                                 break;
                             }
@@ -193,7 +194,6 @@ public class BadBlueBlocks extends LinearOpMode {
             //blockpos 2
 
         }
-
 
         //go and grab skystone 2
         forward(17,1);
