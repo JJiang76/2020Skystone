@@ -30,13 +30,14 @@
 package org.firstinspires.ftc.teamcode.old;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import static org.firstinspires.ftc.teamcode.old.Robot.*;
 
-
+@Disabled
 @Autonomous(name = "Bad Blue Blocks")
 public class BadBlueBlocks extends LinearOpMode {
 

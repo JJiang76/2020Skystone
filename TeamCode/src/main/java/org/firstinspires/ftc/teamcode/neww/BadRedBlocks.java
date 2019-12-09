@@ -27,19 +27,19 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.old;
+package org.firstinspires.ftc.teamcode.neww;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import java.util.List;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 
-import static org.firstinspires.ftc.teamcode.old.Robot.*;
+import java.util.List;
 
-@Disabled
+import static org.firstinspires.ftc.teamcode.neww.Robot.*;
+
+
 @Autonomous(name = "Bad Red Blocks")
 public class BadRedBlocks extends LinearOpMode {
 

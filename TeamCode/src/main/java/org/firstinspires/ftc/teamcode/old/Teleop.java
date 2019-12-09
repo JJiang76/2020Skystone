@@ -1,12 +1,13 @@
 package org.firstinspires.ftc.teamcode.old;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import static org.firstinspires.ftc.teamcode.old.Robot.*;
 
-
+@Disabled
 @TeleOp(name = "testop")
 public class Teleop extends LinearOpMode {
 

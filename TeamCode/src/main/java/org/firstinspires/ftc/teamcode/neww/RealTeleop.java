@@ -1,19 +1,17 @@
-package org.firstinspires.ftc.teamcode.old;
+package org.firstinspires.ftc.teamcode.neww;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 
-import static org.firstinspires.ftc.teamcode.old.Robot.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.firstinspires.ftc.teamcode.neww.Robot.*;
 
-@Disabled
+
 @TeleOp(name = "teleoperation")
 public class RealTeleop extends LinearOpMode {
     
