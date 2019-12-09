@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.unused;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -41,9 +41,10 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+
 @Disabled
-@Autonomous(name = "TF auto blue")
-public class TFautoBlue extends LinearOpMode {
+@Autonomous(name = "TF auto red blocks")
+public class TFautoRedBlocks extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "Skystone.tflite";
     private static final String LABEL_FIRST_ELEMENT = "Stone";
     private static final String LABEL_SECOND_ELEMENT = "Skystone";
@@ -56,6 +57,7 @@ public class TFautoBlue extends LinearOpMode {
     Servo blockgrabBlue;
     Servo grabright;
     Servo grableft;
+    Servo cap;
     int blockPosition = 69;
     final int TICKS_PER_INCH = 90;
     private static final String VUFORIA_KEY =
@@ -93,6 +95,7 @@ public class TFautoBlue extends LinearOpMode {
 
         grabright = hardwareMap.get(Servo.class, "servo0");
         grableft = hardwareMap.get(Servo.class, "servo1");
+        cap = hardwareMap.get(Servo.class, "cap");
 
         rightfront.setDirection(DcMotor.Direction.REVERSE);
         rightback.setDirection(DcMotor.Direction.REVERSE);
@@ -106,6 +109,9 @@ public class TFautoBlue extends LinearOpMode {
 
 
         waitForStart();
+
+        cap.setPosition(0);
+
         long time = System.currentTimeMillis();
         if (opModeIsActive()) {
             while (opModeIsActive() && blockPosition > 3) { //maybe add time limit to this as well
@@ -124,8 +130,8 @@ public class TFautoBlue extends LinearOpMode {
                                     break;
                                 }
                                 else if(recognition.getLeft() > 270){
-                                    blockPosition = 2;
-                                    break;
+                                        blockPosition =2;
+                                        break;
                                 }
                                 else{
                                     blockPosition = 1;
@@ -134,7 +140,6 @@ public class TFautoBlue extends LinearOpMode {
                             else if ((System.currentTimeMillis()-time)>2000){
                                 blockPosition = 1;
                                 telemetry.addLine("time limit reached");
-                                telemetry.update();
                                 break;
                             }
                         }
@@ -154,89 +159,55 @@ public class TFautoBlue extends LinearOpMode {
         blockgrabBlue.setPosition(1);
 
         if (blockPosition == 0) { //left skystone
-            left(14,1);
-            forward(30,1);
+            left(15,1);
+            forward(30,.75);
             blockgrabBlue.setPosition(0);
-            sleep(500);
+            sleep(750);
             back(15,1);
-            clock(21.5, 1);
+            clock(21, 1);
         }
         else if (blockPosition == 1) { //mid skystone
-            //forward
             left(5,1);
-            forward(30,1);
+            forward(30,.75);
             blockgrabBlue.setPosition(0);
-            sleep(500);
+            sleep(750);
             back(15,1);
-            clock(21.5, 1);
-            back(8,1);
+            clock(21, 1);
         }
-        else if (blockPosition == 2) { //right skystone
-            //right 7in
-            right(8,1);
-            //forward
-            forward(30,1);
+        else { //right skystone
+            right(11,1);
+            forward(30,.75);
             blockgrabBlue.setPosition(0);
-            sleep(500);
-            back(14,1);
-            clock(21.5, 1);
+            sleep(750);
             back(15,1);
+            clock(21, 1);
         }
 
         //all 3 possibilities are alliged the same
 
-        back(50, 1);
+        forward(58, 1);
+        if (blockPosition == 0){
+            forward(10,1);
+        }
         blockgrabBlue.setPosition(1);
-        back(28, 1);
-        //block dropped off and servo hopefully out of way
-
-        clock(22,1);
-        //blockgrabBlue.setPosition(1);
-        back(18,.75); //approaches mat
-        //blockgrabBlue.setPosition(.5);
-        //sleep(500);
-
-        //opens servos and lowers arm boi onto mat
-        grableft.setPosition(.463);
-        grabright.setPosition(.435);
-        sleep(500);
-        armboi.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        armboi.setTargetPosition(1060);
-        armboi.setPower(.5);
-        armboi.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        while (armboi.isBusy()) {} //use a sleep instead of while so program will continue regardless
-        armboi.setPower(0);
-
+        back(83, 1);
+        counter(23,1);
+        left(3,1);
+        forward(18,.75);
+        blockgrabBlue.setPosition(0);//block two grabbed
+        sleep(750);
+        back(14,1);
+        clock(22.5,1);
+        forward(77,1);
+        if (blockPosition == 0){
+            forward(10,1);
+        }
         blockgrabBlue.setPosition(1);
-        forward(39,1); //backed up against wall(with hopefully mat)
+        sleep(250);
+        back(18,1);
+        left(27, 1);
 
-        //raise armboi back off of mat
-       // blockgrabBlue.setPosition(.7);//puts blockgrabBlue against wall
-        armboi.setTargetPosition(2);
-        armboi.setPower(.5);
-        armboi.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        while (armboi.isBusy()) {} //use a sleep instead of while so program will continue regardless
-        armboi.setPower(0);
-        //servos default position
-        grableft.setPosition(.9);
-        grabright.setPosition(0);
-        blockgrabBlue.setPosition(1);
 
-        left(107,1);//go get another cube
-
-        back(10,1);
-        clock(42, 1);//turn around
-        forward(19,1);
-        //right(1.5, 1);
-        blockgrabBlue.setPosition(0);
-        sleep(500);
-        //another block grabbed
-
-        back(16,1);
-        counter(22, 1);
-        forward(60, 1); //drives to line
-        blockgrabBlue.setPosition(1);
-        back(19, 1);
 
 
 

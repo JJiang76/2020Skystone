@@ -27,21 +27,16 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.old;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
-import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
-import static org.firstinspires.ftc.teamcode.Robot.*;
+
+import static org.firstinspires.ftc.teamcode.old.Robot.*;
 
 
 @Autonomous(name = "Bad Red Blocks")
@@ -55,7 +50,7 @@ public class BadRedBlocks extends LinearOpMode {
         final double UP = 0; //servo up position
         final double DOWN = 1; //servo down position
 
-        Robot.intMotors(this);
+        Robot.initMotors(this);
 
 
 ////////Program start////////////////////////////////////////////////////////////////////////

@@ -1,34 +1,14 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.unused;
 
-import com.disnodeteam.dogecv.DogeCV;
-import com.disnodeteam.dogecv.detectors.BlankDetector;
-import com.disnodeteam.dogecv.detectors.skystone.SkystoneDetector;
-import com.disnodeteam.dogecv.detectors.skystone.StoneDetector;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
-import org.openftc.easyopencv.OpenCvCamera;
-import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvInternalCamera;
-import org.openftc.easyopencv.OpenCvPipeline;
-import org.openftc.easyopencv.OpenCvWebcam;
-
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import java.util.Locale;
-
 @Disabled
-@Autonomous(name = "camera baby")
-public class autotest extends LinearOpMode {
-    OpenCvCamera camera;
-    SkystoneDetector detector;
+@Autonomous (name = "blue auto")
+public class AutoBlue extends LinearOpMode {
     DcMotor rightfront;
     DcMotor leftfront;
     DcMotor leftback;
@@ -37,10 +17,15 @@ public class autotest extends LinearOpMode {
     Servo blockgrabBlue;
     Servo grabright;
     Servo grableft;
+
     final int TICKS_PER_INCH = 90;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
+        telemetry.addLine("init");
+        telemetry.update();
+
         rightfront = hardwareMap.get(DcMotor.class, "rightfront");
         leftfront = hardwareMap.get(DcMotor.class, "leftfront");
         leftback = hardwareMap.get(DcMotor.class, "leftback");
@@ -59,56 +44,75 @@ public class autotest extends LinearOpMode {
 
         armboi.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-
-
-
-
-
-
-
-
-        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        camera = new OpenCvWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-
-
-        camera.openCameraDevice();
-
-        detector = new SkystoneDetector();
-        detector.useDefaults();
-        camera.setPipeline(detector);
-
-
-
-
         waitForStart();
 
         blockgrabBlue.setPosition(1);
-        forward(29, 1);
-        camera.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+        forward(29, 1); //approaches  a block
+        blockgrabBlue.setPosition(.25);
+        sleep(500);
+        //block grabbed
 
 
+        back(14,1);
+        clock(22, 1);
+        back(50, 1);
+        blockgrabBlue.setPosition(.5);
+        back(27, 1);
+        //block dropped off and servo hopefully out of way
 
+        clock(22,1);
+        blockgrabBlue.setPosition(1);
+        back(16,.75); //approaches mat
+        blockgrabBlue.setPosition(.5);
+        sleep(500);
 
+        //opens servos and lowers arm boi onto mat
+        grableft.setPosition(.463);
+        grabright.setPosition(.435);
+        sleep(500);
+        armboi.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armboi.setTargetPosition(1060);
+        armboi.setPower(.5);
+        armboi.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        while (armboi.isBusy()) {} //use a sleep instead of while so program will continue regardless
+        armboi.setPower(0);
 
-        while (opModeIsActive()) {
-            /*
-             * Send some stats to the telemetry
-             */
-            telemetry.addData("Stone Position X", detector.getScreenPosition().x);
-            telemetry.addData("Stone Position Y", detector.getScreenPosition().y);
-            telemetry.addData("Frame Count", camera.getFrameCount());
-            telemetry.addData("FPS", String.format(Locale.US, "%.2f", camera.getFps()));
-            telemetry.addData("Total frame time ms", camera.getTotalFrameTimeMs());
-            telemetry.addData("Pipeline time ms", camera.getPipelineTimeMs());
-            telemetry.addData("Overhead time ms", camera.getOverheadTimeMs());
-            telemetry.addData("Theoretical max FPS", camera.getCurrentPipelineMaxFps());
-            telemetry.update();
+        blockgrabBlue.setPosition(1);
+        forward(37,1); //backed up against wall(with hopefully mat)
 
-            detector.isDetected();
-        }
+        //raise armboi back off of mat
+        blockgrabBlue.setPosition(.7);//puts blockgrabBlue against wall
+        armboi.setTargetPosition(2);
+        armboi.setPower(.5);
+        armboi.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        while (armboi.isBusy()) {} //use a sleep instead of while so program will continue regardless
+        armboi.setPower(0);
+        //servos default position
+        grableft.setPosition(.9);
+        grabright.setPosition(0);
+        blockgrabBlue.setPosition(1);
 
+        left(107,1);//go get another cube
+
+        back(10,1);
+        clock(42, 1);//turn around
+        forward(19,1);
+        right(1.5, 1);
+        blockgrabBlue.setPosition(.25);
+        sleep(500);
+        //another block grabbed
+
+        back(16,1);
+        counter(22, 1);
+        forward(60, 1); //drives to line
+        blockgrabBlue.setPosition(1);
+        back(19, 1);
 
     }
+
+
+    //90 degrees = 22.22 in
+    //1 inch lateral = 100 ticks
 
     public void forward(double dist, double speed) {
         move(speed, dist, dist, dist, dist);
@@ -177,16 +181,4 @@ public class autotest extends LinearOpMode {
         rightfront.setPower(RFPower);
         rightback.setPower(RBPower);
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }

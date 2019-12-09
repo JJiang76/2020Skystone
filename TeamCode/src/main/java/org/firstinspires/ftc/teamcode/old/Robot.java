@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.old;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -42,7 +42,7 @@ public class Robot {
     public static TFObjectDetector tfod;
 
 
-    public static void intMotors(OpMode opMode) {
+    public static void initMotors(OpMode opMode) {
         rightfront = opMode.hardwareMap.get(DcMotor.class, "rightfront");
         leftfront = opMode.hardwareMap.get(DcMotor.class, "leftfront");
         leftback = opMode.hardwareMap.get(DcMotor.class, "leftback");
@@ -62,8 +62,13 @@ public class Robot {
         rightback.setDirection(DcMotor.Direction.REVERSE);
         leftback.setDirection(DcMotor.Direction.FORWARD);
         leftfront.setDirection(DcMotor.Direction.FORWARD);
+
         armboi.setDirection(DcMotor.Direction.REVERSE);
 
+        armboi.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        resetMotors();
     }
 
     public static void resetMotors() {
@@ -71,6 +76,9 @@ public class Robot {
         rightfront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftback.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightback.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armboi.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         leftfront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightfront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

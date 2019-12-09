@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.unused;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @Disabled
-@Autonomous (name = "blue blocks auto")
-public class AutoBlueBlocks extends LinearOpMode {
+@Autonomous (name = "red auto")
+public class AutoRed extends LinearOpMode {
     DcMotor rightfront;
     DcMotor leftfront;
     DcMotor leftback;
@@ -52,51 +52,60 @@ public class AutoBlueBlocks extends LinearOpMode {
         sleep(500);
         //block grabbed
 
+
         back(14,1);
-        counter(22, 1);
-        forward(50, 1);
-        blockgrabBlue.setPosition(1);
-        //drop off; head back
-
-        back(58, 1);
-        clock(22,1);
-        forward(15, 1);
-        blockgrabBlue.setPosition(.25);
-        sleep(500);
-        //second block grabbed
-
-        back(14,.75);
-        counter(22, 1);
-        forward(58, 1);
-        blockgrabBlue.setPosition(1);
-        //drop off; head back
-
-        back(64, 1);
-        clock(22,1);
-        forward(15, 1);
-        blockgrabBlue.setPosition(.25);
-        sleep(500);
-        //third block grabbed
-
-        back(14,.75);
-        counter(22, 1);
-        forward(64, 1);
-        blockgrabBlue.setPosition(1);
-        //drop off; head back
-/*
-        back(72, 1);
-        clock(22,1);
-        forward(15, 1);
-        blockgrabBlue.setPosition(.25);
-        sleep(500);
-        //fourth block grabbed
-
-        back(14,.75);
-        counter(22, 1);
-        forward(72, 1);
+        counter(21.5, 1);
+        back(50, 1);
         blockgrabBlue.setPosition(.5);
-        //drop off; head back
-*/
+        back(29, 1);
+        //block dropped off and servo hopefully out of way
+
+        counter(22,1);
+        blockgrabBlue.setPosition(1);
+        back(16,.75); //approaches mat
+        blockgrabBlue.setPosition(.5);
+        sleep(500);
+
+        //opens servos and lowers arm boi onto mat
+        grableft.setPosition(.463);
+        grabright.setPosition(.435);
+        sleep(500);
+        armboi.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armboi.setTargetPosition(1060);
+        armboi.setPower(.5);
+        armboi.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        while (armboi.isBusy()) {} //use a sleep instead of while so program will continue regardless
+        armboi.setPower(0);
+
+        blockgrabBlue.setPosition(1);
+        forward(36,1); //backed up against wall(with hopefully mat)
+
+        //raise armboi back off of mat
+        blockgrabBlue.setPosition(.7);//puts blockgrabBlue against wall
+        armboi.setTargetPosition(2);
+        armboi.setPower(.5);
+        armboi.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        while (armboi.isBusy()) {} //use a sleep instead of while so program will continue regardless
+        armboi.setPower(0);
+        //servos default position
+        grableft.setPosition(.9);
+        grabright.setPosition(0);
+        blockgrabBlue.setPosition(1);
+
+        right(105,1);//go get another cube
+
+        back(10,1);
+        counter(44, 1);//turn around
+        forward(19,1);
+        blockgrabBlue.setPosition(.25);
+        sleep(500);
+        //another block grabbed
+
+        back(16,1);
+        clock(22, 1);
+        forward(60, 1); //drives to line
+        blockgrabBlue.setPosition(1);
+        back(18, 1);
     }
 
 

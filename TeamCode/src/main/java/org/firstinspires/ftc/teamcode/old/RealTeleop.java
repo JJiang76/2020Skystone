@@ -1,15 +1,12 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.old;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
-import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
-import static org.firstinspires.ftc.teamcode.Robot.*;
+
+import static org.firstinspires.ftc.teamcode.old.Robot.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +37,7 @@ public class RealTeleop extends LinearOpMode {
             tfod.activate();
         }
 
-        intMotors(this);
+        initMotors(this);
 
         resetMotors();
 

@@ -1,12 +1,10 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.old;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.exception.TargetPositionNotSetException;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
-import static org.firstinspires.ftc.teamcode.Robot.*;
+
+import static org.firstinspires.ftc.teamcode.old.Robot.*;
 
 
 @TeleOp(name = "testop")
@@ -19,36 +17,8 @@ public class Teleop extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        rightfront = hardwareMap.get(DcMotor.class, "rightfront");
-        leftfront = hardwareMap.get(DcMotor.class, "leftfront");
-        leftback = hardwareMap.get(DcMotor.class, "leftback");
-        rightback = hardwareMap.get(DcMotor.class, "rightback");
-        armboi = hardwareMap.get(DcMotor.class, "armboi");
-        slide = hardwareMap.get(DcMotor.class,"armboislides");
+        initMotors(this);
 
-        //autonomous arm
-        blockgrabBlue = hardwareMap.get(Servo.class, "servo2");
-        //bottom two grabbers
-        grabright = hardwareMap.get(Servo.class, "servo0");
-        grableft = hardwareMap.get(Servo.class, "servo1");
-        //board srvos
-        bord1 = hardwareMap.get(Servo.class, "bord1");
-        bord2 = hardwareMap.get(Servo.class, "bord2");
-        cap = hardwareMap.get(Servo.class, "cap");
-
-        rightfront.setDirection(DcMotor.Direction.REVERSE);
-        rightback.setDirection(DcMotor.Direction.REVERSE);
-        leftback.setDirection(DcMotor.Direction.FORWARD);
-        leftfront.setDirection(DcMotor.Direction.FORWARD);
-        armboi.setDirection(DcMotor.Direction.REVERSE);
-
-        //slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        armboi.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        resetMotors();
-
-        armboi.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         waitForStart();
 
