@@ -1,13 +1,17 @@
-package org.firstinspires.ftc.teamcode.old;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.CRServo;
 
-import static org.firstinspires.ftc.teamcode.old.Robot.*;
 
-@Disabled
+
+import static org.firstinspires.ftc.teamcode.Robot.*;
+
 @TeleOp(name = "testop")
 public class Teleop extends LinearOpMode {
 
@@ -15,22 +19,20 @@ public class Teleop extends LinearOpMode {
     int slidepos = 0;
     int armpos = 0;
 
-
     @Override
     public void runOpMode() throws InterruptedException {
         initMotors(this);
 
-
         waitForStart();
+
 
         //servo starting positions
         grableft.setPosition(.9);
         grabright.setPosition(0);
 
-
-
         while(opModeIsActive()) {
             boolean a1 = gamepad1.a;
+            boolean b1 = gamepad1.b;
             boolean x1 = gamepad1.x;
             boolean y1 = gamepad1.y;
             boolean leftBump1 = gamepad1.left_bumper;
@@ -149,19 +151,51 @@ public class Teleop extends LinearOpMode {
             }
 
 
+
+
             //autonomous servo
             if (x1) { //down
-                blockgrabBlue.setPosition(.5);
+                blockgrabBlue.setPosition(0);
             }
             if (y1) { //up (starting)
                 blockgrabBlue.setPosition(1);
             }
 
+            if (a1){
+                blockgrabRed.setPosition(1);
+            }
+            if(b1){
+                blockgrabRed.setPosition(0);
+            }
+
+
             //controller 2////////////////////////////////////////////////////////////////////////////////
 
 
+            //Wheel grabber (Continuous Servos - Green small wheels)
+            if (RBumper2){
+                wheel1.setDirection(DcMotorSimple.Direction.FORWARD);
+                wheel2.setDirection(DcMotorSimple.Direction.REVERSE);
+                wheel1.setPower(1);
+                wheel2.setPower(1);
+            }
+            else if (LBumper2){
+                wheel1.setDirection(DcMotorSimple.Direction.REVERSE);
+                wheel2.setDirection(DcMotorSimple.Direction.FORWARD);
+                wheel1.setPower(1);
+                wheel2.setPower(1);
+
+            }
+            else {
+                wheel1.setDirection(DcMotorSimple.Direction.FORWARD);
+                wheel2.setDirection(DcMotorSimple.Direction.REVERSE);
+                wheel1.setPower(.03);
+                wheel2.setPower(.03);
+            }
 
 
+
+            //End Wheel Grabber Code
 
             if (LStickY2 > 0) {
                 //up
@@ -196,6 +230,8 @@ public class Teleop extends LinearOpMode {
 
 
 
+
+
             if (dpadRight2){
                 bord1.setPosition(0);
                 bord2.setPosition(.5);
@@ -204,6 +240,8 @@ public class Teleop extends LinearOpMode {
                 bord1.setPosition(.5);
                 bord2.setPosition(0);
             }
+
+
 
 
             if (dpadDOWN2) {
@@ -230,13 +268,6 @@ public class Teleop extends LinearOpMode {
                 cap.setPosition(.8);
             }
 
-
-
-
-
-            if (a1) {
-                resetMotors();
-            }
 
 
 

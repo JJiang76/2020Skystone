@@ -1,6 +1,7 @@
-package org.firstinspires.ftc.teamcode.neww;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -30,6 +31,8 @@ public class Robot {
     static Servo bord1;
     static Servo bord2;
     static Servo cap;
+    static CRServo wheel1;
+    static CRServo wheel2;
 
 
     private static final String TFOD_MODEL_ASSET = "Skystone.tflite";
@@ -56,7 +59,14 @@ public class Robot {
         //bottom two grabbers
         grabright = opMode.hardwareMap.get(Servo.class, "servo0");
         grableft = opMode.hardwareMap.get(Servo.class, "servo1");
-
+        //capstone servo
+        cap = opMode.hardwareMap.get(Servo.class, "cap");
+        //board servos
+        bord1 = opMode.hardwareMap.get(Servo.class, "bord1");
+        bord2 = opMode.hardwareMap.get(Servo.class, "bord2");
+        //wheel grabbers
+        wheel1 = opMode.hardwareMap.get(CRServo.class, "wheel1");
+        wheel2 = opMode.hardwareMap.get(CRServo.class, "wheel2");
 
         rightfront.setDirection(DcMotor.Direction.REVERSE);
         rightback.setDirection(DcMotor.Direction.REVERSE);
