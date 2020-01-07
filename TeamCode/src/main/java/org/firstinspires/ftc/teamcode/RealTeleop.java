@@ -2,11 +2,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
-import org.firstinspires.ftc.teamcode.Robot;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +12,6 @@ import static org.firstinspires.ftc.teamcode.Robot.*;
 
 @TeleOp(name = "teleoperation")
 public class RealTeleop extends LinearOpMode {
-    
-    
 
     ArrayList<String> info = new ArrayList<>();
     String dir = "";
@@ -37,10 +32,9 @@ public class RealTeleop extends LinearOpMode {
             tfod.activate();
         }
 
+        initIMU(this);
         initMotors(this);
-
         resetMotors();
-
         waitForStart();
 
         //servo starting positions
@@ -111,6 +105,7 @@ public class RealTeleop extends LinearOpMode {
 
             telemetry.addData("getLeft pos: ", getLeftPos);
             telemetry.addData("getRight pos: ", getRightPos);
+            telemetry.addData("angle: ", getAngle());
 
 
             //driving

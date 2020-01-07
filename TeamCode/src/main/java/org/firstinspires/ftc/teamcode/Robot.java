@@ -10,6 +10,16 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.robotcore.external.navigation.Position;
+import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
+
+import static android.os.SystemClock.sleep;
+
 public class Robot {
 
     public Robot() {}
@@ -33,6 +43,9 @@ public class Robot {
     static Servo cap;
     static CRServo wheel1;
     static CRServo wheel2;
+    static BNO055IMU imu;
+    static Orientation lastAngles = new Orientation();
+    static double globalAngle, correction;
 
 
     private static final String TFOD_MODEL_ASSET = "Skystone.tflite";
@@ -67,6 +80,7 @@ public class Robot {
         //wheel grabbers
         wheel1 = opMode.hardwareMap.get(CRServo.class, "wheel1");
         wheel2 = opMode.hardwareMap.get(CRServo.class, "wheel2");
+
 
         rightfront.setDirection(DcMotor.Direction.REVERSE);
         rightback.setDirection(DcMotor.Direction.REVERSE);
@@ -197,5 +211,80 @@ public class Robot {
         rightback.setPower(RBPower);
     }
 
+    public static void initIMU(OpMode opMode){
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        parameters.mode                = BNO055IMU.SensorMode.IMU;
+        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parameters.loggingEnabled      = false;
 
+        imu = opMode.hardwareMap.get(BNO055IMU.class, "imu");
+
+        imu.initialize(parameters);
+
+        opMode.telemetry.addData("Mode", "calibrating...");
+        opMode.telemetry.update();
+
+        // make sure the imu gyro is calibrated before continuing.
+        while (!imu.isGyroCalibrated()) {
+        }
+        opMode.telemetry.addData("Mode", "waiting for start");
+        opMode.telemetry.addData("imu calib status", imu.getCalibrationStatus().toString());
+        opMode.telemetry.update();
+        resetAngle();
+    }
+
+    public static double getAngle() {
+
+        Orientation angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
+        double deltaAngle = angles.firstAngle - lastAngles.firstAngle;
+
+        if (deltaAngle < -180)
+            deltaAngle += 360;
+        else if (deltaAngle > 180)
+            deltaAngle -= 360;
+
+        globalAngle += deltaAngle;
+
+        lastAngles = angles;
+
+        return globalAngle;
+    }
+
+    public static void moveToAngle(double angle, double power){
+        double  leftPower, rightPower;
+
+        // getAngle() returns + when rotating counter clockwise (left) and - when rotating
+        // clockwise (right).
+
+        if (angle > getAngle()) {   // turn right.
+            leftPower = power;
+            rightPower = -power;
+        }
+        else if (angle < getAngle()) {   // turn left.
+            leftPower = -power;
+            rightPower = power;
+        }
+        else return;
+
+        SetPower(leftPower, rightPower, leftPower, rightPower);
+
+
+
+        // rotate until turn is completed.
+        if (angle > getAngle()) {
+            // On right turn we have to get off zero first.
+
+            while (getAngle() > angle) {}
+        }
+        else    // left turn.
+            while (getAngle() < angle) {}
+
+        SetPower(0,0,0,0);
+    }
+    private static void resetAngle() {
+        lastAngles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        globalAngle = 0;
+    }
 }

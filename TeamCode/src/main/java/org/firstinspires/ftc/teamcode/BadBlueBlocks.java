@@ -24,7 +24,7 @@ public class BadBlueBlocks extends LinearOpMode {
         final double DOWN = 0; //servo down position
 
         Robot.initMotors(this);
-
+        initIMU(this);
 ////////Program start////////////////////////////////////////////////////////////////////////
         waitForStart();
 
@@ -146,6 +146,7 @@ public class BadBlueBlocks extends LinearOpMode {
         //////////aligned with block in same position every time/////////////////////////////////
 
         counter(DEG90+.5,1);
+
         sleep(50);
         forward(40,1);
         sleep(100);

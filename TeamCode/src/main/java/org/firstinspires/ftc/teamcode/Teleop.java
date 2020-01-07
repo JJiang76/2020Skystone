@@ -79,7 +79,6 @@ public class Teleop extends LinearOpMode {
                 armboi.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 armboi.setPower(1);
                 telemetry.addLine("should be moving");
-
             }
             if (slide.getCurrentPosition() > slidepos || slide.getCurrentPosition() < slidepos) {
                 slide.setTargetPosition(slidepos);
@@ -88,7 +87,8 @@ public class Teleop extends LinearOpMode {
             }
 
 
-/* diagonal movement
+
+            //diagonal driving
             if (Math.abs(LStickX) > 0 || Math.abs(LStickY) > 0 || Math.abs(RStickX) > 0) {
                 if (Math.abs(LStickX) < .05 && Math.abs(RStickX) < .05) {
                     SetPower(LStickY, LStickY, LStickY, LStickY);
@@ -108,10 +108,19 @@ public class Teleop extends LinearOpMode {
 
                     SetPower(v1, v2, v3, v4);
                 }
-            }*/
+            }
+            else if (Math.abs(LTrigger1) > 0) {
+                SetPower(-.5 * LTrigger1, .5 * LTrigger1, -.5 * LTrigger1, .5 * LTrigger1);
+            }
+            else if (Math.abs(RTrigger1) > 0) {
+                SetPower(.5 * RTrigger1, -.5 * RTrigger1, .5 * RTrigger1, -.5 * RTrigger1);
+            }
+            else {
+                SetPower(0,0,0,0);
+            }
 
 
-
+/*
             //driving
             if (Math.abs(LStickY) > 0) {
                 SetPower(LStickY, LStickY, LStickY, LStickY);
@@ -134,7 +143,7 @@ public class Teleop extends LinearOpMode {
             else {
                 SetPower(0, 0, 0, 0);
             }
-
+*/
 
             //d pad fine tuned driving
             if(dpadUp1){
@@ -149,8 +158,6 @@ public class Teleop extends LinearOpMode {
             else if(dpadDown1){
                 SetPower(.3, .3, .3, .3);
             }
-
-
 
 
             //autonomous servo
